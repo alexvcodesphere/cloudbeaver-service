@@ -1,0 +1,43 @@
+schemaVersion: v0.2
+prepare:
+  steps: []
+test:
+  steps: []
+run:
+  cloudbeaver:
+    healthEndpoint: http://localhost:8978/
+    plan: 301
+    replicas: 1
+    network:
+      ports:
+        - port: 8978
+          isPublic: false
+      paths:
+        - port: 8978
+          path: /
+    env:
+      HOME: /opt/cloudbeaver/workspace
+    runAsUser: 1501
+    runAsGroup: 1010
+    volumeMounts:
+      - name: _workspace
+        mountPath: /opt/cloudbeaver/workspace
+        workspacePath: cloudbeaver-workspace
+      - name: _workspace
+        mountPath: /opt/cloudbeaver/logs
+        workspacePath: cloudbeaver-logs
+    image: dbeaver/cloudbeaver
+  dbeaver-pg:
+    provider:
+      name: postgres
+      version: v1
+    plan:
+      id: 0
+      parameters:
+        cpu: 5
+        memory: 512
+    config:
+      version: "17.9"
+    secrets:
+      userPassword: ${{ workspace.env['PG_USER_PASSWORD'] }}
+      superuserPassword: ${{ workspace.env['PG_USER_PASSWORD'] }}
