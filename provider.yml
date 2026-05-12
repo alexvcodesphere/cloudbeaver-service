@@ -1,0 +1,59 @@
+name: cloudbeaver-service
+version: v1
+author: alexvcodesphere
+displayName: CloudBeaver
+iconUrl: https://dbeaver.com/wp-content/uploads/2017/09/dbeaver-icon.png
+category: databases
+description: |
+  Managed CloudBeaver instance with a dedicated Postgres database.
+  The bundled database is pre-registered as a CloudBeaver data source,
+  so users land in a working SQL editor on first login.
+
+backend:
+  landscape:
+    gitUrl: https://github.com/alexvcodesphere/cloudbeaver-service
+    ciProfile: main
+
+plans:
+  - id: 0
+    name: Default
+    description: Default Plan
+    parameters: {}
+
+configSchema:
+  type: object
+  properties:
+    PG_VERSION:
+      type: string
+      description: Postgres major.minor version for the bundled database
+      default: "17.9"
+      x-update-constraint: immutable
+    PG_USER:
+      type: string
+      description: Database user CloudBeaver authenticates as
+      default: app
+    PG_DATABASE:
+      type: string
+      description: Default database CloudBeaver opens on first login
+      default: app
+  required:
+    - PG_VERSION
+    - PG_USER
+    - PG_DATABASE
+  additionalProperties: false
+
+secretsSchema:
+  type: object
+  properties:
+    PG_USER_PASSWORD:
+      type: string
+      format: password
+      description: Password for the bundled Postgres user and superuser
+  required:
+    - PG_USER_PASSWORD
+  additionalProperties: false
+
+detailsSchema:
+  type: object
+  properties: {}
+  additionalProperties: false

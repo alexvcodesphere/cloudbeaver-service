@@ -16,7 +16,11 @@ run:
         - port: 8978
           path: /
     env:
-      HOME: /opt/cloudbeaver/workspace
+      PG_HOST: ms-postgres-v1-${{ team.id }}-landscape-${{ workspace.id }}-dbeaver-pg.ms-postgres
+      PG_PORT: "5432"
+      PG_USER: ${{ workspace.env['PG_USER'] }}
+      PG_DATABASE: ${{ workspace.env['PG_DATABASE'] }}
+      PG_PASSWORD: ${{ vault.PG_USER_PASSWORD }}
     runAsUser: 1501
     runAsGroup: 1010
     volumeMounts:
@@ -37,7 +41,7 @@ run:
         cpu: 5
         memory: 512
     config:
-      version: "17.9"
+      version: ${{ workspace.env['PG_VERSION'] }}
     secrets:
-      userPassword: ${{ workspace.env['PG_USER_PASSWORD'] }}
-      superuserPassword: ${{ workspace.env['PG_USER_PASSWORD'] }}
+      userPassword: ${{ vault.PG_USER_PASSWORD }}
+      superuserPassword: ${{ vault.PG_USER_PASSWORD }}

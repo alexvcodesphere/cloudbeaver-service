@@ -1,3 +1,9 @@
-cloudbeaver-workspace/
+cloudbeaver-workspace/*
+!cloudbeaver-workspace/GlobalConfiguration/
+cloudbeaver-workspace/GlobalConfiguration/*
+!cloudbeaver-workspace/GlobalConfiguration/.dbeaver/
+cloudbeaver-workspace/GlobalConfiguration/.dbeaver/*
+!cloudbeaver-workspace/GlobalConfiguration/.dbeaver/data-sources.json
+
 cloudbeaver-logs/
 .codesphere-internal/

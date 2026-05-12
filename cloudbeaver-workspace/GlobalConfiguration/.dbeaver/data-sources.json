@@ -1,0 +1,23 @@
+{
+  "folders": {},
+  "connections": {
+    "bundled-postgres": {
+      "provider": "postgresql",
+      "driver": "postgres-jdbc",
+      "name": "Bundled Postgres",
+      "save-password": true,
+      "configuration": {
+        "host": "${env:PG_HOST}",
+        "port": "${env:PG_PORT}",
+        "database": "${env:PG_DATABASE}",
+        "url": "jdbc:postgresql://${env:PG_HOST}:${env:PG_PORT}/${env:PG_DATABASE}",
+        "type": "dev",
+        "auth-model": "native",
+        "credentials": {
+          "user": "${env:PG_USER}",
+          "password": "${env:PG_PASSWORD}"
+        }
+      }
+    }
+  }
+}
