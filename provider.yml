@@ -2,7 +2,7 @@ name: cloudbeaver-service
 version: v1
 author: alexvcodesphere
 displayName: CloudBeaver
-iconUrl: https://dbeaver.com/wp-content/uploads/2017/09/dbeaver-icon.png
+iconUrl: https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/DBeaver_logo.svg/250px-DBeaver_logo.svg.png
 category: databases
 description: |
   Managed CloudBeaver instance with a dedicated Postgres database.
